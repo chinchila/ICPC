@@ -1,0 +1,7 @@
+Como colocar código?
+	1. Abre contents.txt
+	2. Vai até a seção desejada, por exemplo [Number Theory]
+	3. Coloca o nome_do_arquivo.cpp aperta TAB e o nome do algoritmo numa linha vazia abaixo da seção (Atenção que é um tab, não espaços)
+
+Como gerar o pdf? (PRECISA TER ALGUM COMPILADOR LaTeX!!!)
+	abre o terminal e digita make all para gerar o pdf ou python gen.py

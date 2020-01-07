@@ -1,0 +1,147 @@
+[Number Theory]
+number_theory/sieve.cpp	Sieve of Eratosthenes
+number_theory/discrete_log.cpp	Discrete logarithm
+number_theory/numeric_fundamentals.cpp	GCD/LCM/Fast expo/Mul mod
+number_theory/euclid_chinese.cpp	Euclidian + Chinese Reminder
+number_theory/primitive_root.cpp	Primitive root
+number_theory/miller_rabin.cpp	Miller rabin
+number_theory/factors.cpp	Prime factors
+number_theory/pollard.cpp	Pollard Rho
+number_theory/totient.cpp	$\phi$ of Euler
+number_theory/prime_factors.cpp	Compute prime factors
+
+[Numeric]
+numeric/binomial.cpp	Binomial
+numeric/simpson.cpp	Simpson Rule
+numeric/runge.cpp	Runge-kutta ODE
+numeric/fft.cpp	Fast Fourier transform
+numeric/simplex.cpp	Simplex method for LP
+numeric/gauss.cpp	Gaussian elimination
+numeric/karatsuba.cpp	Karatsuba
+numeric/incexc.cpp	Inclusion-Exclusion principle
+
+[Graph algorithms]
+graphs/dijkstra.cpp	Dijkstra Shortest path
+graphs/SPFA.cpp	SPFA
+graphs/floydWarshall.cpp	Floyd-Warshall Shortest path
+graphs/diameter.cpp	Diameter
+graphs/tarjanSCC.cpp	Tarjan
+graphs/kosaraju.cpp	Kosaraju
+graphs/LCARMQ.cpp	LCA fast query
+graphs/lcalog.cpp	LCA log query
+graphs/kuhn.cpp	Kuhn bipartite matching
+graphs/hopcroftKarp.cpp	Hopcroft-Karp Fast bipartite matching
+graphs/bipartiteMatching.cpp	Matrix matching
+graphs/blossom.cpp	Edmond's blossom general matching
+graphs/bridges.cpp	Bridges and articulation points
+graphs/dinic.cpp	Dinic max flow
+graphs/mincost.cpp	Min cost Max flow
+graphs/mincost2.cpp	Min cost Max flow 2
+graphs/maxcosthung.cpp	Maximum matching (hungarian)
+graphs/kruskal.cpp	Kruskal MST
+graphs/bcc.cpp	Tarjan Biconnected Components
+graphs/centroid_decomp.cpp	Centroid decomposition
+graphs/eulertour.cpp	Euler tour
+graphs/eulercircuit.cpp	Hierholzers(euler circuit)
+graphs/stoer_wagner.cpp	Min cut Stoer-Wagner
+graphs/isomorphictree.cpp	AHU Isomorphic tree
+graphs/prufer.cpp	Prufer code
+graphs/2sat.cpp	2-Sat
+graphs/TSP.cpp	Traveling salesman problem
+graphs/chromatic.cpp	Chromatic Number
+graphs/dynamic_reachdag.cpp	Dynamic reachability in DAG
+graphs/kshortest.cpp	K-ShortestPaths
+
+[Data structures]
+data_structures/sparseTable.cpp	Sparse Table
+data_structures/BIT.cpp	Binary Indexed Tree
+data_structures/BIT2D.cpp	2D query sum with Treap \& BIT
+data_structures/DSU.cpp	Disjoint set with persistency
+data_structures/minqueue.cpp	MinQueue
+data_structures/ordered_set.cpp	Ordered Set
+data_structures/segtree.cpp	Lazy segment tree
+data_structures/psegtree.cpp	Persistent segment tree
+data_structures/mergesorttree.cpp	Mergesort tree
+data_structures/trie.cpp	Trie
+data_structures/lichao.cpp	Li-chao Tree
+data_structures/hldmax.cpp	Heavy Light Decomposition
+data_structures/linkcut.cpp	Link-Cut Tree
+data_structures/mo.cpp	Mo's algorithm (sqrt decomp)
+
+[Strings]
+string/ahoCorasick.cpp	Aho Corasick Automata
+string/z.cpp	Z pattern search
+string/kmp.cpp	KMP
+string/hashing.cpp	Hashing pattern
+string/suffixarray.cpp	Suffix Array + LCP
+string/manacher.cpp	Longest palindromic string
+string/suffixautomata.cpp	Suffix automaton
+
+[Dynamic programming]
+dp/knapsack.cpp	Knapsack problems
+dp/coin.cpp	Coin problems
+dp/zigzag.cpp	Longest Zigzag
+dp/trees.cpp	DP on Trees
+dp/lis.cpp	Longest Increasing Subsequence
+dp/lcs.cpp	Longest Common Subsequence
+dp/hulltrick.cpp	Convex hull trick
+dp/knuth.cpp	Knuth Optimization
+dp/dcopt.cpp	Divide and conquer Optimization
+dp/digit.cpp	Digit DP
+dp/editdist.cpp	Edit distance
+
+[Geometry]
+geometry/klee.cpp	Klee (Area of intersection of rects)
+geometry/convexHull.cpp	Convex hull
+geometry/closestpair.cpp	Closest pair with line sweep
+geometry/point.cpp	Point2D
+geometry/lineDistance.cpp	Line distance
+geometry/sideOf.cpp	Side of point from segment
+geometry/segdist.cpp	Closest distance to segment
+geometry/segInter.cpp	Segment Intersection
+geometry/lineIntersection.cpp	Line Intersection
+geometry/circleTangents.cpp	Tangent points of circle
+geometry/circumcircle.cpp	Circumcircle
+geometry/circleLineIntersection.cpp	Circle-Line Intersection
+geometry/MinimumEnclosingCircle.cpp	Minimum Enclosing Circle
+geometry/circleintersection.cpp	Intersection of two circles
+geometry/HullDiameter.cpp	Hull Diameter
+geometry/InsidePolygon.cpp	Point Inside Polygon
+geometry/PointInsideHull.cpp	Point Inside Hull
+geometry/Delaunay.cpp	Delaunay triangulation
+geometry/PolygonCut.cpp	Polygon cut
+geometry/polygonarea.cpp	Area of polygon
+geometry/PolygonCenter.cpp	Center of polygon
+geometry/LineHullIntersection.cpp	Line convex polygon intersection
+geometry/PolyhedronVolume.cpp	Volume of polyhedron
+geometry/linearTransformation.cpp	Linear Transformation
+geometry/sphericalDistance.cpp	Spherical Distance
+geometry/Angle.cpp	Angle sorting
+geometry/kdTree.cpp	K-D Tree
+geometry/point3d.cpp	Point3D
+geometry/3dhull.cpp	Convex hull 3D
+
+[Java]
+Java/template.java	Template
+Java/bigmath.java	Big Numbers
+
+[Miscellaneous]
+misc/matrix.cpp	Matrix operations
+misc/RNG.cpp	Good RNG
+misc/mergesort.cpp	Merge sort with inversions
+misc/fstoi.cpp	Fast string to int
+misc/subset.cpp	All subsets of a set
+misc/paren2pol.cpp	Convert Parenthesis to Polish
+misc/weekday.cpp	Week day
+misc/latlong.cpp	Latitude-Longitude to rectangular
+misc/date.cpp	Date manipulation
+misc/bithacks.cpp	BitHacks
+misc/template.cpp	Template
+misc/difarray.cpp	Difference Array
+misc/ternarysearch.cpp	Ternary search
+misc/hackenbush.cpp	Green Hackenbush
+misc/128bit.cpp	128 bit integer
+misc/gridtools.cpp	Grid Tools
+misc/rand.py	Random numbers in python (to create tests)
+
+
