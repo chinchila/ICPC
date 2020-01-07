@@ -8,7 +8,7 @@ int main() {
     b /= g;
  
     cur = b;
-    for(ll i = 2; i * i * i <= cur; i++) {
+    for(ll i = 2; i <= cbrt(cur); i++) {
         if(cur % i == 0) {
             ans *= i;
             while(cur % i == 0) cur /= i;
