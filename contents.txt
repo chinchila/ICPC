@@ -76,6 +76,7 @@ string/hashing.cpp	Hashing pattern
 string/suffixarray.cpp	Suffix Array + LCP
 string/manacher.cpp	Longest palindromic string
 string/suffixautomata.cpp	Suffix automaton
+string/eertree.cpp	Palindromic Tree
 
 [Dynamic programming]
 dp/knapsack.cpp	Knapsack problems
