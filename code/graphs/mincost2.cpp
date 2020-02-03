@@ -1,5 +1,6 @@
+// index 0
 #define ll long long
-const ll inf = 0x3f3f3f3f;
+const ll inf = 0x3f3f3f3f3f3f3f3f;
 struct edge {
 	ll a, b, cap, cost, flow;
 	size_t back;
@@ -10,9 +11,9 @@ void addedge(ll a, ll b, ll cap, ll cost) {
 	edge e1 = {a,b,cap,cost,0,g[b].size()};
 	edge e2 = {b,a,0,-cost,0,g[a].size()};
 	g[a].push_back((ll) e.size());
-    e.push_back(e1);
+	e.push_back(e1);
 	g[b].push_back((ll) e.size());
-    e.push_back(e2);
+	e.push_back(e2);
 }
 ll n, s, t, m;
 ll k = inf; // The maximum amount of flow allowed
@@ -64,6 +65,6 @@ pair<ll,ll> getflow() {
 		}
 		flow += addflow;
 	}
-    return {flow,cost};
+	return {flow,cost};
 }
 
