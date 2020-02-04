@@ -42,8 +42,7 @@ for( int j = 0 ; j < 2 ; ++j ) {
 }
 es[0] = es[0] == es[1];
 if (!es[0] && centr[0].size()>1) {
-	++x;
-	p[centr[0][1]]=-1;
+	++x, p[centr[0][1]]=-1;
 	es[0] = dfs(0, centr[0][1]) == es[1];
 }
 puts( ( es[0] ? "YES" : "NO" ) );

@@ -9,6 +9,7 @@ number_theory/factors.cpp	Prime factors
 number_theory/pollard.cpp	Pollard Rho
 number_theory/totient.cpp	$\phi$ of Euler
 number_theory/prime_factors.cpp	Compute prime factors
+number_theory/finite_field.cpp	Finite Field operations
 
 [Numeric]
 numeric/binomial.cpp	Binomial
@@ -35,6 +36,7 @@ graphs/bipartiteMatching.cpp	Matrix matching
 graphs/blossom.cpp	Edmond's blossom general matching
 graphs/bridges.cpp	Bridges and articulation points
 graphs/dinic.cpp	Dinic max flow
+graphs/edkarp.cpp	Edmonds-karp maxflow
 graphs/mincost.cpp	Min cost Max flow
 graphs/mincost2.cpp	Min cost Max flow 2
 graphs/maxcosthung.cpp	Maximum matching (hungarian)

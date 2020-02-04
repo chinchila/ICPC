@@ -1,5 +1,5 @@
 // This gives a path that each edge is visited only one time | adj[i].second is the edge id
-// It has an euler cycle iff all vertex are even | O(n+m)
+// It has an euler cycle iff all vertex have even degree | O(n+m)
 int N, M;
 vector<pair<int, int> > adj[MAXN];
 int cur[MAXN];

@@ -1,4 +1,4 @@
-// cpar[i] stores parent of i | O(n)
+// cpar[i] stores parent of i | O(n) | index 0
 int N;
 vector<int> adj[MAXN];
 int sz[MAXN];
