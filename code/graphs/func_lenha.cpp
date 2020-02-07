@@ -1,4 +1,4 @@
-// index 1
+// index 1, undirected graph, for directed see commented code
 // dg[i] = degree of vertex i
 // proc[i] = processed vertex on time i
 // par[i] = parent of i
@@ -16,6 +16,7 @@ int par[MAXN], depth[MAXN], sub[MAXN], cycle[MAXN];
 int ini[MAXN], sz[MAXN], idOnCycle[MAXN], cycleCount;
 int parCycle[MAXN], n, dg[MAXN];
 
+// directed does not need this
 int findParent(int u) {
 	for( int v : g[u] ) if( !vis[v] ) return v;
 	return -1;
@@ -30,6 +31,7 @@ void foundCycle(int u){
 	cycles[idCycle].clear();
 	while( vis[u] == 0 ) {
 		vis[u] = 1;
+		// directed does not need this
 		par[u] = findParent(u);
 		if(par[u] == -1) par[u] = iniv;
 		parCycle[u] = u, cycle[u] = idCycle;
@@ -42,18 +44,21 @@ void foundCycle(int u){
 
 void lenha(){
 	queue<int> q;
-	for( int i = 1 ;  i<= n ; ++i )
+	for( int i = 1 ; i <= n ; ++i )
+		//if(!dg[i]) q.push(i), vis[i] = 1;
 		if(dg[i] == 1 ) q.push(i), vis[i] = 1;
 	while(!q.empty()){
 		int u = q.front(); q.pop();
 		proc.push_back(u);
+		//int v = par[u];
 		int v = findParent(u);
 		par[u] = v, ++sub[u];
 		sub[v] += sub[u], --dg[v];
+		//if(!dg[v]) q.push(v), vis[v] = 1;
 		if(dg[v] == 1 ) q.push(v), vis[v] = 1;
 	}
 	cycleCount = 0;
-	for( int i = 1 ;  i<= n ; ++i )
+	for( int i = 1 ; i <= n ; ++i )
 		if(!vis[i]) foundCycle(i);
 	for( int i = proc.size() - 1 ; i >= 0 ; --i ) {
 		int v = proc[i], pv = par[v];
