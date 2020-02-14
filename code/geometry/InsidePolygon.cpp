@@ -7,7 +7,6 @@
 #include "point.cpp"
 #include "segdist.cpp"
 
-template<class P>
 bool inPolygon(vector<P> &p, P a, bool strict = true) {
 	int cnt = 0, n = p.size();
 	for( int i = 0 ; i < n ; ++i ){

@@ -8,14 +8,14 @@ struct PR {
 	int a, b;
 };
 
-struct F { P3 q; int a, b, c; };
+struct F { P q; int a, b, c; };
 
-vector<F> hull3d(const vector<P3>& A) {
+vector<F> hull3d(const vector<P>& A) {
 	vector<vector<PR>> E(A.size(), vector<PR>(A.size(), {-1, -1}));
 #define E(x,y) E[f.x][f.y]
 	vector<F> FS;
 	auto mf = [&](int i, int j, int k, int l) {
-		P3 q = (A[j] - A[i]).cross((A[k] - A[i]));
+		P q = (A[j] - A[i]).cross((A[k] - A[i]));
 		if (q.dot(A[l]) > q.dot(A[i]))
 			q = q * -1;
 		F f{q, i, j, k};

@@ -1,3 +1,4 @@
+//Aways prefer long long/int as PType
 template <class T> int sgn( T x ) { return (x > 0) - (x < 0); }
 template<class T> struct Point {
 	typedef Point P;
@@ -23,4 +24,7 @@ template<class T> struct Point {
 	// returns point rotated 'a' radians ccw around the origin
 	P rotate(double a) const { return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
 };
+
+typedef int PType;
+typedef Point<PType> P;
 

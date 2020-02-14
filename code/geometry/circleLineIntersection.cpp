@@ -6,7 +6,7 @@
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502884L
 #endif
-int circleLineIntersection(const point& p0, const point& p1, const point& cen, double rad, point& r1, point & r2) {
+int circleLineIntersection(const P& p0, const P& p1, const P& cen, double rad, P& r1, P& r2) {
 	double a, b, c, t1, t2;
 	a = (p1 - p0).dot(p1 - p0);
 	b = 2 * (p1 - p0).dot(p0 - cen);
@@ -26,7 +26,7 @@ int circleLineIntersection(const point& p0, const point& p1, const point& cen, d
 // returns the arc length
 // p1, p2 are the segment
 // r radius, cen is center of circle
-double calcArc( point p1, point p2, double r, point &cen ) {
+double calcArc( P p1, P p2, double r, P &cen ) {
 	double d = (p2-p1).dist();
 	double ang = ((p1-cen).angle() - (p2-cen).angle()) * 180 / M_PI;
 	if( ang < 0 ) ang += 360;

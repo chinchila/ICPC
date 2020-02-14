@@ -9,8 +9,6 @@ O(\log N)
 #include "sideOf.cpp"
 #include "segdist.cpp"
 
-typedef Point<ll> P;
-
 bool inHull(const vector<P>& l, P p, bool strict = true) {
 	int a = 1, b = l.size() - 1, r = !strict;
 	if (l.size() < 3) return r && onSegment(l[0], l.back(), p);

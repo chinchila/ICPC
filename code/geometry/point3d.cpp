@@ -26,3 +26,7 @@ template<class T> struct Point3D {
 		return u*dot(u)*(1-c) + (*this)*c - cross(u)*s;
 	}
 };
+
+typedef double PType;
+typedef Point<PType> P;
+

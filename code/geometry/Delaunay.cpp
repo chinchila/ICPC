@@ -7,7 +7,7 @@ If any three points are colinear or any four are on the same circle, behavior is
 #include "point.cpp"
 #include "3dhull.cpp"
 
-template<class P, class F>
+template<class F>
 void delaunay(vector<P>& ps, F trifun) {
 	if (sz(ps) == 3) { int d = (ps[0].cross(ps[1], ps[2]) < 0);
 		trifun(0,1+d,2-d); }
@@ -28,7 +28,6 @@ O(n log n)
 */
 #include "point.cpp"
 
-typedef Point<ll> P;
 typedef struct Quad* Q;
 typedef __int128_t lll; // (can be ll if coords are < 2e4)
 P arb(LLONG_MAX,LLONG_MAX); // not equal to any other point

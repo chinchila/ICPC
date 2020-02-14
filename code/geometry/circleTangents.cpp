@@ -4,7 +4,6 @@ O(1)
  */
 #include "point.cpp"
 
-template<class P>
 pair<P,P> circleTangents(const P &p, const P &c, double r) {
 	P a = p-c;
 	double x = r*r/a.dist2(), y = sqrt(x-x*x);

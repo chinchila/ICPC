@@ -4,7 +4,6 @@ O(n)
  */
 #include "point.cpp"
 
-typedef Point<double> P;
 P polygonCenter(const vector<P>& v) {
 	P res(0, 0); double A = 0;
 	for (int i = 0, j = v.size() - 1; i < v.size(); j = i++) {

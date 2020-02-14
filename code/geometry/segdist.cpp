@@ -5,13 +5,13 @@ O(1)
 */
 #include "point.cpp"
 
-template<class P> bool onSegment( P a, P b, P c ) {
-	return segDist(a,b,c) < 1e-10;
-}
-
-typedef Point<double> P;
+// Watch out on max, the 0 should match the Point type
 double segDist(P& s, P& e, P& p) {
 	if (s==e) return (p-s).dist();
 	auto d = (e-s).dist2(), t = min(d,max(.0,(p-s).dot(e-s)));
 	return ((p-s)*d-(e-s)*t).dist()/d;
+}
+
+bool onSegment( P a, P b, P c ) {
+	return segDist(a,b,c) < 1e-10;
 }

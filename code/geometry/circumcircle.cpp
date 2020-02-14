@@ -6,7 +6,6 @@ O(1)
  */
 #include "point.cpp"
 
-typedef Point<double> P;
 double ccRadius(const P& A, const P& B, const P& C) {
 	return (B-A).dist()*(C-B).dist()*(A-C).dist()/abs((B-A).cross(C-A))/2;
 }

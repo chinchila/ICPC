@@ -6,7 +6,6 @@ p = polygonCut(p, P(0,0), P(1,0));
 #include "point.cpp"
 #include "lineIntersection.cpp"
 
-typedef Point<double> P;
 vector<P> polygonCut(const vector<P>& poly, P s, P e) {
 	vector<P> res;
 	for( int i = 0 ; i < poly.size() ; ++i ) {

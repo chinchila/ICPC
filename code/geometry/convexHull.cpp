@@ -2,14 +2,16 @@
 // NAO ESQUECE QUE O TAMANHO DO HULL VAI MUDAR, NAO USE N, USE .size()
 // COLOQUEI UM n POR PARAMETRO PRA ISSO, MAS SE VAI USAR O N ANTIGO NAO PASSE
 // #CUIDADO
-typedef pair<double, double> point;
-double ccw( point a, point b, point c ) {
-    return (b.first - a.first) * (c.second - a.second ) - (b.second - a.second) * (c.first - a.first );
+// You can use pair<ptype, ptype> as P too
+#include "point.cpp"
+
+PType ccw( P a, P b, P c ) {
+    return (b.x - a.x) * (c.y - a.y ) - (b.y - a.y) * (c.x - a.x );
 }
 
-vector<point> ch( point *points, int &n ) {
+vector<P> ch( P *points, int &n ) {
 	sort( points, points+n );
-	vector<point> hull( n + 1 );
+	vector<P> hull( n + 1 );
 	int idx = 0;
 	for( int i = 0 ; i < n ; ++i ) {
 		while( idx >= 2 && ccw( hull[idx - 2], hull[idx - 1], points[i] ) >= 0 ) --idx;
