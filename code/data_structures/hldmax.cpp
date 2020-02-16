@@ -41,9 +41,15 @@ namespace hld {
 		}
 		return depth[u] < depth[v] ? u : v;
 	}
+
 	// insert segtree with lazy here
 	void update_subtree( int n, int x ) {
 		update( in[n], out[n] - 1, x);
+	}
+
+	// Is v in subtree of v?
+	bool inSubTree( int u, int v ) {
+		return in[u] <= in[v] && in[v] < out[u];
 	}
 
 	ll query_subtree( int n ) {
