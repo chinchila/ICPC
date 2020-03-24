@@ -32,6 +32,8 @@ ull pollard( ull n ) {
 	}
 }
 
+// Keep your eyes on limits, this one is
+// 10^18 and the second one is 10^19
 void fator( ll n, vector<ll>& v ) {
 	if( isprime( n ) ) { v.pb(n); return; }
 	ll f = pollard( n );

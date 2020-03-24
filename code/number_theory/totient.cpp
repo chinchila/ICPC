@@ -14,6 +14,7 @@ int phi(int n) {
 // Compute array with all phi until N
 // O(n*?) it is not so slow, check if its better to
 // O(k*sqrt(n)) or this | this one was faster on SPOJ
+// Better use linear sieve for this
 int phi[MAXN];
 void totient( int N ) {
 	for( int i = 1 ; i < N ; ++i)  phi[i]=i;

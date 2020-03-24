@@ -1,6 +1,6 @@
 // find k such that a^k = m mod(p), with p prime
 // O(sqrt(n))
-ll bb( ll a, ll m, ll p ) {
+ll bsgs( ll a, ll m, ll p ) {
 	unordered_map<ll, ll> mp;
 	ll b = 1, an = a;
 	while( b * b < p ) b++, an = ( an * a ) % p;
@@ -17,10 +17,10 @@ ll bb( ll a, ll m, ll p ) {
 	return -1;
 }
 
-// bellow works for some C composite A^k = B mod C
+// bellow works for some C composite A^k = B mod C sometimes
 // O(sqrt(n)), do not forget fastexp
 #define ll long long
-ll bb(ll A, ll B, ll C) {
+ll bsgs(ll A, ll B, ll C) {
 	A %= C, B %= C;
 	if(B == 1) return 0;
 	ll k = 0;
