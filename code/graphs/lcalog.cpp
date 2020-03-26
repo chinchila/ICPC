@@ -1,11 +1,12 @@
 // To compute minimum just use the commented code | index 0
 // O(log n) query | O(n log n) build
 typedef pair<int,int> pii;
-int parent[MAXN], level[MAXN], dist[MAXN];
+int parent[MAXN], level[MAXN], dist[MAXN], in[MAXN], out[MAXN], C;
 int anc[MAXN][MAXLG];//, mnn[MAXM][30];
 vector<pii> g[MAXN];
 
 void dfs( int u ) {
+	in[u] = C++;
 	for( pii pv : g[u] ) {
 		int v = pv.first, w = pv.second;
 		if( v != parent[u] ) {
@@ -15,6 +16,7 @@ void dfs( int u ) {
 			dfs( v );
 		}
 	}
+	out[u] = C;
 }
 
 void build() {
@@ -28,7 +30,13 @@ void build() {
 		}
 }
 
-//true if v is ancestor of u
+// true if u is ancestor of v O(1)
+bool is_ancestor( int u, int v ) {
+	return in[u] <= in[v] && out[v] <= out[u];
+}
+
+// true if v is ancestor of u O(log n)
+// use this if you need to query the path
 bool is_ancestor( int u, int v ) {
 	if( level[u] < level[v] ) return false;
 	int d = level[u] - level[v];
