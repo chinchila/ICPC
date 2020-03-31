@@ -26,9 +26,19 @@ ll mulmod( ll a, ll b, ll m ) {
 // a^b mod m | O(log b)
 ll fastexp( ll a, ll b, ll m ) {
 	ll r = 1;
-	for( a %= m ; b ; b >>= 1, a = mulmod( a, a, m ) )
-		if( b & 1 ) r = mulmod( r, a, m );
+	for( a %= m ; b ; b >>= 1, a = (a*a)%m )
+		if( b & 1 ) r = (r*a)%m;
 	return r;
+}
+
+// x^e | O(log e)
+ll fexp(ll x, ll e) {
+	ll ans(1);
+	for(; e > 0; e /= 2) {
+		if(e & 1) ans = ans * x;
+		x = x * x;
+	}
+	return ans;
 }
 
 // Multiplicative Inverse

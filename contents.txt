@@ -20,7 +20,7 @@ numeric/simplex.cpp	Simplex method for LP
 numeric/gauss.cpp	Gaussian elimination
 numeric/karatsuba.cpp	Karatsuba
 numeric/incexc.cpp	Inclusion-Exclusion principle
-
+numeric/lagrangepoly.cpp	Lagrange polynomial interpolation
 [Graph algorithms]
 graphs/dijkstra.cpp	Dijkstra Shortest path
 graphs/SPFA.cpp	SPFA
