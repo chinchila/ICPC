@@ -42,6 +42,13 @@ ll fexp(ll x, ll e) {
 }
 
 // Multiplicative Inverse
+ll inv( ll a, ll m ){
+	ll x, y, g;
+	euclid(a, m, x, y, g);
+	if(g != 1) return -1;
+	return (x%m + m) % m;
+}
+// All inverses
 ll inv[MAXN];
 inv[1] = 1;
 for( int i = 2 ; i < MOD ; ++i )

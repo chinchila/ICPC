@@ -1,7 +1,10 @@
+// g is a primitive root modulo n if for every integer a coprime to n,
+// there is an integer k such that g^k = a (mod n)
+// this function computes all primitive roots less than p, modulo p
 // do not forget fastexp
 // some numbers that have primitive root:
 // 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 17, 18, 19, 22, 23, 25, 26, 27, 29
-// O(n) eu acho
+// O(n*sqrt(n*log(n))) eu acho
 #define ll long long
 
 ll root( ll p ) {
