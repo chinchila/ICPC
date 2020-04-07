@@ -1,3 +1,4 @@
+// If you need memory otimization, please consider using pointers
 // O(sum(|s|))
 int nds = 0;
 int g[MAXN][26];
@@ -54,3 +55,4 @@ bool find( string s ) {
 	}
 	return trie[cur].end;
 }
+

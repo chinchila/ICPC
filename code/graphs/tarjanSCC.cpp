@@ -34,3 +34,18 @@ void tarjan() {
 	for( int i = 1 ; i <= n ; ++i ) if (scc[i] == -1) dfs(i);
 }
 
+// Mount condensed graph
+memset(f, -1, sizeof(f));
+for( int i = 0 ; i < sccnum ; ++i ) {
+	for( int j : comps[i] ) {
+		for( int k : adj[j] ) {
+			int sc = scc[k];
+			if( f[sc] != i && i != sc ) {
+				f[sc] = i;
+				fim[i].push_back( sc );
+				ge[sc]++;
+			}
+		}
+	}
+}
+
