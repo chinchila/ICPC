@@ -1,6 +1,7 @@
 // Maximum cardinality (bipartite matching) O(n^3) worst case
 // if slow random_shuffle vertice orders.
 // Apply it only on left set. indexed 1
+// In pratice it is pretty fast
 vector<int> g[MAXN];
 int vis[MAXN], ma[MAXN], mb[MAXM];
 int n, x; // n is size of left set
