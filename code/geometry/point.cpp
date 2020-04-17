@@ -15,7 +15,10 @@ template<class T> struct Point {
 	T cross(P p) const { return x*p.y - y*p.x; }
 	T cross(P a, P b) const { return (a-*this).cross(b-*this); }
 	T dist2() const { return x*x + y*y; }
+	// Manhattan distance
 	T manh() const { return abs(x) + abs(y); }
+	// Chebyshev distance (manhattan with diagonals)
+	T cheb() const { return max(abs(x), abs(y)); }
 	double dist() const { return sqrt((double)dist2()); }
 	// angle to x-axis in interval [-pi, pi]
 	double angle() const { return atan2(y, x); }
