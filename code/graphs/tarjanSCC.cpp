@@ -3,6 +3,7 @@ int n;
 vector<int> adj[MAXN];
 int scc[MAXN], sccnum = 0;
 int in[MAXN], low[MAXN], t = 0;
+//vector<int> comps[MAXN];
 stack<int> s;
 bool instack[MAXN];
 
@@ -21,6 +22,7 @@ void dfs( int u ) {
 			int su = s.top();
 			s.pop();
 			scc[su] = sccnum;
+            //comps[sccnum].push_back(su);
 			instack[su] = false;
 			if (su == u) break;
 		}
@@ -35,6 +37,7 @@ void tarjan() {
 }
 
 // Mount condensed graph
+// fim = graph, ge[i] = grau de entrada
 memset(f, -1, sizeof(f));
 for( int i = 0 ; i < sccnum ; ++i ) {
 	for( int j : comps[i] ) {
