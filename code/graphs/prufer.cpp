@@ -38,9 +38,8 @@ vector<int> treeToCode() {
 	return code;
 }
 
-Tree codeToTree(vector<int> code) {
+void codeToTree(vector<int> code) {
 	int n = code.size() + 2;
-	Tree T(n);
 	vector<int> deg(n, 1);
 	for (int i = 0; i < n-2; ++i)
 		++deg[code[i]];
@@ -61,6 +60,5 @@ Tree codeToTree(vector<int> code) {
 	for (int u = 0; u < n-1; ++u) 
 		if (deg[u] == 1)
 			addEdge(u, n-1);
-	return T;
 }
 
