@@ -43,3 +43,32 @@ int diameter(){
 	dfs( x, 0, diam, x );
 	return diam;
 }
+
+
+//all maximum distance from vertice i in tree
+int dfs1( int u, int p, vector<int> *g, int *dist){
+    dist[u] = 0;
+    for( int v : g[u] ) if( v != p ){
+        dist[u] = max( dist[u], dfs1(v, u, g, dist)+1 );
+    }
+    return dist[u];
+}
+
+void dfs2( int u, int cima, int p, vector<int> *g, int *dist ){
+    pair<int, int> b[2] = {{cima, p}, {0,u}};
+    dist[u] = max(dist[u], cima);
+    for( int v : g[u] ) if( v != p ){
+        pair<int, int> l = {dist[v]+1, v};
+        if( l > b[0] ) b[1] = b[0], b[0] = l;
+        else if( l > b[1] ) b[1] = l;
+    }
+    for( int v : g[u] ) if( v != p ){
+        int mx;
+        if( b[0].second == v ) mx = max( cima, b[1].first );
+        else mx = max( cima, b[0].first );
+        dfs2( v, mx + 1, u, g, dist );
+    }
+}
+//on main:
+dfs1(1, -1, g, dist);
+dfs2(1, 0, -1, g, dist);
