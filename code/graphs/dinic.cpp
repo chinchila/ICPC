@@ -14,9 +14,10 @@ class max_flow {
 		ll cap, f;
 	};
 
-	vector<edge> adj[MAX_N];
-	int dist[MAX_N];
-	int ptr[MAX_N];
+	vector<edge> adj[MAXN];
+	int dist[MAXN];
+	int ptr[MAXN];
+  int cut[MAXN];
 
 	bool bfs( int s, int t ) {
 		memset( dist, -1, sizeof dist );
@@ -69,11 +70,11 @@ public:
 	void clear() {
 		for( int n = 0 ; n < MAX_N ; ++n ) adj[n].clear();
 	}
+  void dfs( int u, max_flow &mf ) {
+  	cut[u] = true;
+  	for( auto &e : mf.adj[u] )
+  		if( e.cap > e.f && !cut[e.t] ) dfs( e.t, mf );
+  }
 };
 
-int cut[MAXN];
-void dfs( int u, max_flow &mf ) {
-	cut[u] = true;
-	for( auto &e : mf.adj[u] )
-		if( e.cap > e.f && !cut[e.t] ) dfs( e.t, mf );
-}
+max_flow g;
