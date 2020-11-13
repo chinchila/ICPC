@@ -8,6 +8,13 @@ double lineDist(const P& a, const P& b, const P& p) {
 	return (double)(b-a).cross(p-a)/(b-a).dist();
 }
 
+// closest point of line b-a from point p
+// a.b = |a||b|cos o
+P PointLineDist(const P& a, const P& b, const P& p) {
+	return a + (b-a)/(b-a).dist()*(p-a).dot(b-a)/(b-a).dist();
+}
+
+
 // from point p to seg b-a
 double dist( P p, P a, P b ) {
 	double k = ((p-a).dot(b-a))/((b-a).dot(b-a));
