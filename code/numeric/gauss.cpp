@@ -97,14 +97,9 @@ bool gauss( vector<bitset<N> > a, bitset<N> &ans ) {
 		if( a[i][n] && !a[i][i] )
 			return false;
 	for( int i = 0 ; i < n ; ++i )
+    // to know if there are more (than 1) solutions
+    // just put an else here and return something different
 		if( where[i] != -1 )
 			ans[i] = a[where[i]][n]/a[where[i]][i];
-	for( int i = 0 ; i < n ; ++i ) {
-		int sum = 0;
-		for( int j = 0 ; j < n ; ++j )
-			sum += ans[j] * a[i][j];
-		if( sum - a[i][n] > 0 )
-			return false;
-	}
 	return true;
 }
