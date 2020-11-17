@@ -39,3 +39,41 @@ double Gauss( vector<vector<double> > &a, vector<vector<double> > &b ) {
 		for( int k = 0 ; k < n ; ++k ) swap( a[k][irow[p]], a[k][icol[p]] );
 	return det;
 }
+
+// Implementation from cp-algorithms
+// works with modulus (maybe the first works too)
+int gauss(vector <vector<num> > a, vector<num> &ans) {
+    int n = (int) a.size();
+    int m = (int) a[0].size() - 1;
+    vector<int> where(m, -1);
+    for (int col=0, row=0; col<m && row<n; ++col) {
+        int sel = row;
+        for (int i=row; i<n; ++i)
+            if (a[i][col] > a[sel][col])
+                sel = i;
+        if(a[sel][col] == 0)
+            continue;
+        for (int i=col; i<=m; ++i)
+            swap (a[sel][i], a[row][i]);
+        where[col] = row;
+        for (int i=0; i<n; ++i)
+            if (i != row) {
+                num c = a[i][col] / a[row][col];
+                for (int j=col; j<=m; ++j)
+                    a[i][j] -= a[row][j] * c;
+            }
+        ++row;
+    }
+    ans.assign (m, 0);
+    for (int i=0; i<m; ++i)
+        if (where[i] != -1)
+            ans[i] = a[where[i]][m]/a[where[i]][i];
+    for (int i=0; i<n; ++i) {
+        num sum = 0;
+        for (int j=0; j<m; ++j)
+            sum += ans[j] * a[i][j];
+        if (sum - a[i][m] > 0)
+            return 0;
+    }
+    return 1;
+}

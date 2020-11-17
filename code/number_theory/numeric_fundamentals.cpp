@@ -23,6 +23,11 @@ ll mulmod( ll a, ll b, ll m ) {
 	return ( r + m ) % m;
 }
 
+ull mulmod(ull a, ull b, ull M) {
+	ll ret = a * b - M * (ull)(1.L / M * a * b);
+	return ret + M * (ret < 0) - M * (ret >= (ll)M);
+}
+
 // a^b mod m | O(log b)
 ll fastexp( ll a, ll b, ll m ) {
 	ll r = 1;

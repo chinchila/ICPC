@@ -5,6 +5,11 @@ O(log n) amortized for all other operations
 typedef long long lld;
 typedef unsigned long long llu;
 using namespace std;
+// L = Left node
+// R = Right node
+// P = Parent
+// PP = Parent on main tree
+// sz = size of the subtree (including root)
 struct Node { int L, R, P, PP, sz; };
 Node LCT[MAXN];
 
