@@ -43,37 +43,68 @@ double Gauss( vector<vector<double> > &a, vector<vector<double> > &b ) {
 // Implementation from cp-algorithms
 // works with modulus (maybe the first works too)
 int gauss(vector <vector<num> > a, vector<num> &ans) {
-    int n = (int) a.size();
-    int m = (int) a[0].size() - 1;
-    vector<int> where(m, -1);
-    for (int col=0, row=0; col<m && row<n; ++col) {
-        int sel = row;
-        for (int i=row; i<n; ++i)
-            if (a[i][col] > a[sel][col])
-                sel = i;
-        if(a[sel][col] == 0)
-            continue;
-        for (int i=col; i<=m; ++i)
-            swap (a[sel][i], a[row][i]);
-        where[col] = row;
-        for (int i=0; i<n; ++i)
-            if (i != row) {
-                num c = a[i][col] / a[row][col];
-                for (int j=col; j<=m; ++j)
-                    a[i][j] -= a[row][j] * c;
-            }
-        ++row;
-    }
-    ans.assign (m, 0);
-    for (int i=0; i<m; ++i)
-        if (where[i] != -1)
-            ans[i] = a[where[i]][m]/a[where[i]][i];
-    for (int i=0; i<n; ++i) {
-        num sum = 0;
-        for (int j=0; j<m; ++j)
-            sum += ans[j] * a[i][j];
-        if (sum - a[i][m] > 0)
-            return 0;
-    }
-    return 1;
+	int n = (int) a.size();
+	int m = (int) a[0].size() - 1;
+	vector<int> where(m, -1);
+	for (int col=0, row=0; col<m && row<n; ++col) {
+		int sel = row;
+		for (int i=row; i<n; ++i)
+			if (a[i][col] > a[sel][col])
+				sel = i;
+		if(a[sel][col] == 0)
+			continue;
+		for (int i=col; i<=m; ++i)
+			swap (a[sel][i], a[row][i]);
+		where[col] = row;
+		for (int i=0; i<n; ++i)
+			if (i != row) {
+				num c = a[i][col] / a[row][col];
+				for (int j=col; j<=m; ++j)
+					a[i][j] -= a[row][j] * c;
+			}
+		++row;
+	}
+	ans.assign (m, 0);
+	for (int i=0; i<m; ++i)
+		if (where[i] != -1)
+			ans[i] = a[where[i]][m]/a[where[i]][i];
+	for (int i=0; i<n; ++i) {
+		num sum = 0;
+		for (int j=0; j<m; ++j)
+			sum += ans[j] * a[i][j];
+		if (sum - a[i][m] > 0)
+			return 0;
+	}
+	return 1;
+}
+
+// Gauss with bitset (mod 2) 32 times faster
+bool gauss( vector<bitset<N> > a, bitset<N> &ans ) {
+	int n = a.size();
+	vector<int> where( n, -1 );
+	for( int i = 0 ; i < n ; ++i ) {
+		int ps = i;
+		for( ; ps < n ; ++ps )
+			if( a[ps][i] ) break;
+		if( ps == n ) continue;
+		if( ps != i ) swap( a[ps], a[i] );
+		where[ps] = i;
+		for( int j = 0 ; j < n ; ++j )
+			if( a[j][i] && j != i )
+				a[j] ^= a[i];
+	}
+	for( int i = 0 ; i < n ; ++i )
+		if( a[i][n] && !a[i][i] )
+			return false;
+	for( int i = 0 ; i < n ; ++i )
+		if( where[i] != -1 )
+			ans[i] = a[where[i]][n]/a[where[i]][i];
+	for( int i = 0 ; i < n ; ++i ) {
+		int sum = 0;
+		for( int j = 0 ; j < n ; ++j )
+			sum += ans[j] * a[i][j];
+		if( sum - a[i][n] > 0 )
+			return false;
+	}
+	return true;
 }
