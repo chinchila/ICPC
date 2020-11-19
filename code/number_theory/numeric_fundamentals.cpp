@@ -31,8 +31,8 @@ ull mulmod(ull a, ull b, ull M) {
 // a^b mod m | O(log b)
 ll fastexp( ll a, ll b, ll m ) {
 	ll r = 1;
-	for( a %= m ; b ; b >>= 1, a = (a*a)%m )
-		if( b & 1 ) r = (r*a)%m;
+	for( a %= m ; b ; b >>= 1, a = mulmod(a, a, m) )
+		if( b & 1 ) r = mulmod(r, a, m);
 	return r;
 }
 
