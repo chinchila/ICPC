@@ -32,6 +32,25 @@ ull pollard( ull n ) {
 	}
 }
 
+// Pollard rho with g(x) = (x*x+1)%n
+// Generally much faster than the above
+ull pollard(ull n) {
+	if (n == 9) return 3;
+	if (n == 25) return 5;
+	if (n == 49) return 7;
+	if (n == 323) return 17;
+	auto f = [n](ull x) { return mulmod(x, x, n) + 1; };
+	ull x = 0, y = 0, t = 0, prd = 2, i = 1, q;
+	while (t++ % 32 || gcd(prd, n) == 1) {
+		if (x == y)
+			x = ++i, y = f(x);
+		if ((q = mulmod(prd, max(x, y) - min(x, y), n)))
+			prd = q;
+		x = f(x), y = f(f(y));
+	}
+	return gcd(prd, n);
+}
+
 // Keep your eyes on limits, this one is
 // 10^18 and the second one is 10^19
 void fator( ll n, vector<ll>& v ) {
