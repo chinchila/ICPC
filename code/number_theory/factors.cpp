@@ -19,4 +19,19 @@ vector<ll> divisors( ll n) {
 	return v;
 }
 
-
+// Recover divisors given a map<ll, int> ps
+// ps[p] = k means that p^k is a factor of n
+vector<ll> divs;
+divs.push_back(1);
+for (auto k : ps) {
+	auto p = k.first;
+	auto c = k.second;
+	auto s = divs.size();
+	for (int i = 0; i < s; ++i) {
+		ll f = 1;
+		for (int j = 0; j < c; ++j) {
+			f *= p;
+			divs.push_back(divs[i]*f);
+		}
+	}
+}
