@@ -5,6 +5,16 @@
 ll st[MAXSEG];
 ll lazy[MAXSEG];
 
+void build(int n, int s, int e, int *v){
+    if( s == e ) st[n] = v[s];
+    else{
+        int m = (s+e)/2;
+        build((n*2)+1, s, m, v);
+        build((n*2)+2, m+1, e, v);
+        st[n] = max(st[(n*2)+1], st[(n*2)+2]);
+    }
+}
+
 void push(int node, int lo, int hi) {
 	if (lazy[node] == 0) return;
 	st[node] += lazy[node]; //(hi-lo+1)*lazy[node] for sum

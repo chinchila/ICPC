@@ -4,7 +4,7 @@
 typedef long long ll;
 typedef pair<ll, ll> pll;
 inline ll f( pll a, int x ) {
-	return ( a.first * x * x ) + a.second;
+	return ( a.first * x ) + a.second;
 }
 
 #define MAXLC 1000000
