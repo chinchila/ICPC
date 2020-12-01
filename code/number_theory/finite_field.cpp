@@ -1,4 +1,5 @@
 // Operations with mod p :)
+// pow only works with positive numbers.
 typedef long long LL;
 
 template<int p> struct FF {

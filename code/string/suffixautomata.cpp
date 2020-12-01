@@ -1,5 +1,5 @@
 // Suffix Automaton Construction - O(n) FROM IME
-
+// Suffix automaton = compressed form of all substrings
 const int N = 1e6+1, K = 26;
 int sl[2*N], len[2*N], sz, last;
 ll cnt[2*N];
@@ -43,6 +43,13 @@ void build(char *s) {
 	clear();
 	for(int i=0; s[i]; ++i) add(s[i]);
 }
+
+// terminal state = where end up on a suffix
+// to get terminals use the following
+vector<int> terminals;
+terminals.push_back(0);
+int p = last;
+while(p>0) terminals.push_back( p ), p = sl[p];
 
 // Pattern matching - O(|p|)
 bool check(char *p) {
