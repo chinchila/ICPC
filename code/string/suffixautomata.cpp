@@ -62,6 +62,9 @@ bool check(char *p) {
 }
 
 // Substring count - O(|p|)
+// uncomment to calculate length
+// of all distinct substrings
+// concatenated
 ll d[2*N];
 
 void substr_cnt(int u) {
@@ -70,6 +73,7 @@ void substr_cnt(int u) {
 		int v = p.second;
 		if (!d[v]) substr_cnt(v);
 		d[u] += d[v];
+		//sum[u] += d[v] + sum[v];
 	}
 }
 
