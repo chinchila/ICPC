@@ -85,7 +85,39 @@ ll substr_cnt() {
 
 // k-th Substring - O(|s|)
 // Just find the k-th path in the automaton.
-// Can be done with the value d calculated in previous problem.
+// first compute all terminals
+// where terminal[i] = true if i is terminal
+// then run this code
+
+ll oc[2*N], sum[2*N];
+
+void dfs(int u) {
+	oc[u] += terminal[u];
+	word[u] += terminal[u];
+	for(auto p : adj[u]) {
+		int v = p.second;
+		if(!oc[v]) dfs(v);
+		oc[u] += oc[v];
+		word[u] += oc[v] + word[v];
+	}
+}
+
+void kth(ll cur, ll k, string &ans, int u) {
+	if(cur >= k) return;
+	for(auto it : adj[u]) {
+		if(cur + word[it.second] >= k){
+			cur += oc[it.second];
+			ans += it.first;
+			kth(cur, k, ans, it.second);
+			return;
+		}
+		else
+			cur += word[it.second];
+	}
+	// If it reaches here, k > # of different substrings
+	ans = "No such line.";
+}
+
 
 // Smallest cyclic shift - O(|s|)
 // Build the automaton for string s + s. And adapt previous dp
