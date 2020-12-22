@@ -2,11 +2,15 @@
 // Suffix automaton = compressed form of all substrings
 // len[i] = # of substrings that pass through state i
 // sl[i] = suffix link of state i
-// sz = 
+// sz = # of states
+// sum[i] = # of distinct substrings of i-th prefix of string
+// dp[i] = # number of paths that end on state i
 const int N = 1e6+1, K = 26;
 int sl[2*N], len[2*N], sz, last;
 ll cnt[2*N];
 map<int, int> adj[2*N];
+//ll dp[2*N];
+//ll sum[N];
 
 void add(int c) {
 	int u = sz++;
@@ -14,7 +18,8 @@ void add(int c) {
 	cnt[u] = 1;
 	int p = last;
 	while(p != -1 and !adj[p][c])
-		adj[p][c] = u, p = sl[p];
+		 adj[p][c] = u, p = sl[p];
+		 //dp[u] += dp[p]
 	if (p == -1) sl[u] = 0;
 	else {
 		int q = adj[p][c];
@@ -26,6 +31,7 @@ void add(int c) {
 			adj[r] = adj[q];
 			while(p != -1 and adj[p][c] == q)
 				adj[p][c] = r, p = sl[p];
+				//dp[q] -= dp[p], dp[r] += dp[p]
 			sl[q] = sl[u] = r;
 		}
 	}
@@ -37,11 +43,12 @@ void clear() {
 	last = 0;
 	sz = 1;
 	sl[0] = -1;
+	//dp[0] = 1;
 }
 
 void build(char *s) {
 	clear();
-	for(int i=0; s[i]; ++i) add(s[i]);
+	for(int i=0; s[i]; ++i) add(s[i]); //sum[i+1] = sum[i] + dp[last]
 }
 
 // terminal state = where end up on a suffix
