@@ -1,6 +1,6 @@
 // Suffix Automaton Construction - O(n) FROM IME
 // Suffix automaton = compressed form of all substrings
-// len[i] = # of substrings that pass through state i
+// len[i] = length of the longest string in the state i
 // sl[i] = suffix link of state i
 // sz = # of states
 // sum[i] = # of distinct substrings of i-th prefix of string
