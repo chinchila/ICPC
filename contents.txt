@@ -70,6 +70,7 @@ data_structures/lichao.cpp	Li-chao Tree
 data_structures/hldmax.cpp	Heavy Light Decomposition
 data_structures/linkcut.cpp	Link-Cut Tree
 data_structures/mo.cpp	Mo's algorithm (sqrt decomp)
+data_structures/segpa.cpp	Segtree PA
 
 [Strings]
 string/ahoCorasick.cpp	Aho Corasick Automata
