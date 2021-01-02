@@ -78,12 +78,21 @@ int lrs = 0;
 for( int i = 0 ; i < n ; ++i ) lrs = max(lrs, lcp[i]);
 
 // Longest Common Substring O(n)
-// m = strlen(s);
-// strcat(s, "$"); strcat(s, p); strcat(s, "#");
-// n = strlen(s);
-int lcs = 0;
-for( int i = 1 ; i < n ; ++i ) if ( ( sa[i] < m ) != ( sa[i - 1] < m ) )
-	lcs = max(lcs, lcp[i]);
+string LCS(string &a, string &b) {
+  string s = a + '$' + b + '#';
+  vector<int> sa = buildSa(s);
+  vector<int> lcp = LCP(sa, s);
+  int lcs = 0, idx = -1;
+  for (int i = 0; i < s.size()-1; i++) {
+    if ((sa[i] < a.size()) != (sa[i + 1] < a.size())) {
+      if (lcp[i] > lcs) {
+        lcs = lcp[i];
+        idx = sa[i];
+      }
+    }
+  }
+  return s.substr(idx, lcs);
+}
 
 // To calc LCS for multiple texts use a slide window with minqueue
 // The number of different substrings of a string is n*(n + 1)/2 - sum(lcs[i]) 
