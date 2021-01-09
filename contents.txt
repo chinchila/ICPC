@@ -21,6 +21,8 @@ numeric/gauss.cpp	Gaussian elimination
 numeric/karatsuba.cpp	Karatsuba
 numeric/incexc.cpp	Inclusion-Exclusion principle
 numeric/lagrangepoly.cpp	Lagrange polynomial interpolation
+numeric/floorsum.cpp    Floor-sum
+
 [Graph algorithms]
 graphs/dijkstra.cpp	Dijkstra Shortest path
 graphs/SPFA.cpp	SPFA
