@@ -79,27 +79,34 @@ int gauss(vector <vector<num> > a, vector<num> &ans) {
 }
 
 // Gauss with bitset (mod 2) 32 times faster
-bool gauss( vector<bitset<N> > a, bitset<N> &ans ) {
-	int n = a.size();
-	vector<int> where( n, -1 );
-	for( int i = 0 ; i < n ; ++i ) {
-		int ps = i;
-		for( ; ps < n ; ++ps )
-			if( a[ps][i] ) break;
-		if( ps == n ) continue;
-		if( ps != i ) swap( a[ps], a[i] );
-		where[ps] = i;
-		for( int j = 0 ; j < n ; ++j )
-			if( a[j][i] && j != i )
-				a[j] ^= a[i];
+// m = # of equations
+// n = # of variables
+// vector b is the last on a
+// example a[0][0] = 0, a[0][1] = 1, a[0][n] = 0:
+// |a  |b
+// |0 1|0
+bool gauss( vector<bitset<N> > a, bitset<N> &ans, int n ) {
+	int m = a.size(), c = 0;
+	bitset<N> where; where.set();
+	for( int j = n-1, i ; j >= 0 ; --j ) {
+		for( i = c; i < m ; ++i )
+			if( a[i][j] ) break;
+		if( i == m ) continue;
+		swap( a[c], a[i] );
+		i = c++; where[j] = 0;
+		for( int k = 0 ; k < m ; ++k )
+			if( a[k][j] && k != i )
+				a[k] ^= a[i];
 	}
-	for( int i = 0 ; i < n ; ++i )
-		if( a[i][n] && !a[i][i] )
-			return false;
-	for( int i = 0 ; i < n ; ++i )
-    // to know if there are more (than 1) solutions
-    // just put an else here and return something different
-		if( where[i] != -1 )
-			ans[i] = a[where[i]][n]/a[where[i]][i];
+	ans = where;
+	for( int i = 0 ; i < m ; ++i ){
+		int ac = 0;
+		for( int j = 0 ; j < n ; ++j ){
+			if( !a[i][j] ) continue;
+			if( !where[j] ) where[j] = 1, ans[j] = ac^a[i][n];
+			ac ^= ans[j];
+		}
+		if( ac != a[i][n] ) return false;
+	}
 	return true;
 }
