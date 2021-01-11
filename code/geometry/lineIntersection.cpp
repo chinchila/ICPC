@@ -16,3 +16,7 @@ pair<int, P> lineInter(P s1, P e1, P s2, P e2) {
 	auto p = s2.cross(e1, e2), q = s2.cross(e2, s1);
 	return {1, (s1 * p + e1 * q) / d};
 }
+
+pair<int, P> lineInter(L l1, L l2){
+	return lineInter(l1[0], l1[1], l2[0], l2[1]);
+}

@@ -25,10 +25,32 @@ template<class T> struct Point {
 	P unit() const { return *this/dist(); }
 	P perp() const { return P(-y, x); }
 	P normal() const { return perp().unit(); }
+	int quad() const { return sgn(y) == 1 || (sgn(y) == 0 && sgn(x) >= 0); }
 	// returns point rotated 'a' radians ccw around the origin
 	P rotate(double a) const { return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
 };
 
-typedef int PType;
+typedef double PType;
 typedef Point<PType> P;
 
+// Line ps[0] -> ps[1], currently used on halfplaneIS only
+struct L{ 
+	P ps[2];
+	P& operator[](int i) { return ps[i]; }
+	P dir() { return ps[1] - ps[0]; }
+	L (P a,P b) {
+		ps[0]=a;
+		ps[1]=b;
+	}
+	bool include(P p) { return sgn((ps[1] - ps[0]).cross(p - ps[0])) > 0; }
+	L push(){ // push eps outward
+		const double eps = 1e-8;
+		P delta = (ps[1] - ps[0]).perp().unit() * eps;
+		return {ps[0] + delta, ps[1] + delta};
+	}
+};
+
+bool parallel(L l0, L l1) { return sgn( l0.dir().cross( l1.dir() ) ) == 0; }
+bool sameDir(L l0, L l1) {
+	return parallel(l0, l1) && sgn(l0.dir().dot(l1.dir()) ) == 1;
+}
