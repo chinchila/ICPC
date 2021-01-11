@@ -181,17 +181,46 @@ ll occur_count(char *p) {
 
 
 // LCS of 2 Strings - O(|s| + |t|)
-// Build automaton of s and traverse the automaton wih string t
-// mantaining the current state and the current lenght.
-// When we have a transition: update state, increase lenght by one.
-// If we don't update state by suffix link and the new lenght will
-// should be reduced (if bigger) to the new state length.
-// Answer will be the maximum length of the whole traversal.
+string LCS(string& S, string& T) {
+	build(S);
+	int at = 0, l = 0, ans = 0, pos = -1;
+	for (int i = 0; i < T.size(); i++) {
+		while (at and !adj[at].count(T[i])) at = sl[at], l = len[at];
+		if (adj[at].count(T[i])) at = adj[at][T[i]], l++;
+		else at = 0, l = 0;
+		if (l > ans) ans = l, pos = i;
+	}
+	return T.substr(pos-ans+1, ans);
+}
 
 // LCS of n Strings - O(n*|s|*K)
-// Create a new string S = s_1 + d1 + ... + s_n + d_n,
-// where d_i are delimiters that are unique (d_i != d_j).
-// For each state use DP + bitmask to calculate if it can
-// reach a d_i transition without going through other d_j.
-// The answer will be the biggest len[u] that can reach all
-// d_i's.
+void LCS(int caso, char *t){
+    int state_num=0,match=0;
+    for(int i=0;t[i];i++){
+    while(state_num && !adj[state_num][t[i]-'a']) {
+      state_num=sl[state_num];
+      match=len[state_num];
+    }
+    if(adj[state_num][t[i]-'a']){
+      state_num=adj[state_num][t[i]-'a'];
+      match++;
+    }
+    dp[caso][state_num]=max(dp[caso][state_num],match);
+    }
+    for(int state=sz-1;state>=0;state--){
+        if(dp[caso][state]){
+            while(state){
+                state=sl[state];
+                dp[caso][state] = len[state];
+            }
+        }
+    }
+}
+// on main:
+int res=0;
+for(int state=1;state<sz;state++){
+	int temp = dp[0][state];
+	for(int i=1;i<n;i++)
+		temp = min(temp, dp[i][state]);
+	res = max(res, temp);
+}
