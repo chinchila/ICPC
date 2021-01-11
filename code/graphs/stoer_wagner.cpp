@@ -4,7 +4,7 @@
 // uncomment to recover the cut (v[bestCut] will be it)
 // be carefull with cin >> n on local variable
 // this changes the matrix g, if you want to use the graph please make a copy
-// index 0
+// index 0, this algo is pretty slow
 #define MAXN 1410
 #define ll long long
 #define INF 0x3f3f3f3f
@@ -44,4 +44,32 @@ int mincut() {
 		}
 	}
 	return ans;
+}
+
+// karger algorithm is ok when we have no weight on edges
+// find and join are from union-find, use it with path compression.
+// run this at most n*n*lg(n) times and you should be fine,
+// if TLE try lowering the IT variable to n*n or n*lg(n) or n
+int kargerMinCut(int V){
+	int E = edge.size();
+	for( int v = 0 ; v < V ; ++v )
+		rt[v] = v, rk[v] = 0;
+	while( V > 2 ){
+		int i = rand() % E;
+		int u = find(edge[i].first);
+		int v = find(edge[i].second);
+		if(join(u, v)) --V;
+	}
+	int cut = 0;
+	for( int i = 0 ; i < E ; ++i ){
+		int u = find(edge[i].first);
+		int v = find(edge[i].second);
+		if( u != v ) ++cut;
+	}
+	return cut;
+}
+//on main
+int IT = n*n*__lg(n);
+while(IT--){
+	mn = min(mn, kargerMinCut(n));
 }
