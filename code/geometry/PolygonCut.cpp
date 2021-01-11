@@ -1,5 +1,6 @@
 /**
-Returns a vector with the vertices of a polygon with everything to the left of the line going from s to e cut away.
+Returns a vector with the vertices of a polygon with everything
+to the left of the line going from s to e cut away.
 vector<P> p = ...;
 p = polygonCut(p, P(0,0), P(1,0));
 */

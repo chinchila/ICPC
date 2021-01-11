@@ -1,5 +1,9 @@
 // Half plane intersection O(n*log(n))
 // lines must be ccw (anti-horário)
+
+#include "point.h"
+#include "lineIntersection.cpp"
+
 bool cmp (P a,  P b) {
 	if( a.quad() != b.quad() ) return a.quad() < b.quad();
 	else return sgn( a.cross( b ) ) > 0;
