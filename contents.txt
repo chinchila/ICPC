@@ -56,6 +56,8 @@ graphs/chromatic.cpp	Chromatic Number
 graphs/dynamic_reachdag.cpp	Dynamic reachability in DAG
 graphs/kshortest.cpp	K-ShortestPaths
 graphs/func_lenha.cpp	Functional graphs
+graphs/mstdir.cpp   Minimum arborescence (MST digraph)
+graphs/steinertree.cpp  Minimum Steiner tree
 
 [Data structures]
 data_structures/sparseTable.cpp	Sparse Table
