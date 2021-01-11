@@ -4,6 +4,7 @@
 // uncomment to recover the cut (v[bestCut] will be it)
 // be carefull with cin >> n on local variable
 // this changes the matrix g, if you want to use the graph please make a copy
+// index 0
 #define MAXN 1410
 #define ll long long
 #define INF 0x3f3f3f3f
