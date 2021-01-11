@@ -1,34 +1,46 @@
-// a is adjacency matrix bidirected
+// g is adjacency matrix bidirected
 // minimum cut problem in undirected weighted graphs with non-negative weights
 // O(VE)
-memset(use,0,sizeof(use));
-ans=maxlongint;
-for (int i=1;i<N;i++)
-{
-	memcpy(visit,use,505*sizeof(int));
-	memset(reach,0,sizeof(reach));
-	memset(last,0,sizeof(last));
-	t=0;
-	for (int j=1;j<=N;j++)
-		if (use[j]==0) {t=j;break;}
-	for (int j=1;j<=N;j++)
-		if (use[j]==0) reach[j]=a[t][j],last[j]=t;
-	visit[t]=1;
-	for (int j=1;j<=N-i;j++)
-	{
-		maxc=maxk=0;
-		for (int k=1;k<=N;k++)
-			if ((visit[k]==0)&&(reach[k]>maxc)) maxc=reach[k],maxk=k;
-		c2=maxk,visit[maxk]=1;
-		for (int k=1;k<=N;k++)
-			if (visit[k]==0) reach[k]+=a[maxk][k],last[k]=maxk;
+// uncomment to recover the cut (v[bestCut] will be it)
+// be carefull with cin >> n on local variable
+// this changes the matrix g, if you want to use the graph please make a copy
+#define MAXN 1410
+#define ll long long
+#define INF 0x3f3f3f3f
+
+int n, g[MAXN][MAXN];
+
+int mincut() {
+	int ans = INF;
+	int w[MAXN], sel;
+	bool exist[MAXN], added[MAXN];
+	// int bestCut = -1;
+	// set<int> v[MAXN];
+	// for (int i=0; i<n; ++i) v[i].assign (1, i);
+	memset (exist, true, sizeof exist);
+	for (int phase=0; phase<n-1; ++phase) {
+		memset (added, false, sizeof added);
+		memset (w, 0, sizeof w);
+		for (int j=0, prev; j<n-phase; ++j) {
+			sel = -1;
+			for (int i=0; i<n; ++i)
+				if (exist[i] && !added[i] && (sel == -1 || w[i] > w[sel]))
+					sel = i;
+			if (j == n-phase-1) {
+				if (w[sel] < ans) {
+					ans = w[sel];
+					// bestCut = sel;
+				}
+				// v[prev].insert(v[prev].end(), v[sel].begin(), v[sel].end());
+				for (int i=0; i<n; ++i) g[prev][i] = g[i][prev] += g[sel][i];
+				exist[sel] = false;
+			}
+			else {
+				added[sel] = true;
+				for (int i=0; i<n; ++i)  w[i] += g[sel][i];
+				prev = sel;
+			}
+		}
 	}
-	c1=last[c2];
-	sum=0;
-	for (int j=1;j<=N;j++)
-		if (use[j]==0) sum+=a[j][c2];
-	ans=min(ans,sum);
-	use[c2]=1;
-	for (int j=1;j<=N;j++)
-		if ((c1!=j)&&(use[j]==0)) {a[j][c1]+=a[j][c2];a[c1][j]=a[j][c1];}
+	return ans;
 }
