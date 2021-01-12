@@ -58,7 +58,9 @@ struct eertree{
 // n = number of strings
 // ans = answer
 // pt[i] = palindromic tree of word i
-//
+// on main
+// dfs(odd roots)
+// dfs(even roots)
 int n, ans;
 eertree pt[N];
 
