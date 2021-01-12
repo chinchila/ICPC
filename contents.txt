@@ -10,6 +10,7 @@ number_theory/pollard.cpp	Pollard Rho
 number_theory/totient.cpp	$\phi$ of Euler
 number_theory/prime_factors.cpp	Compute prime factors
 number_theory/finite_field.cpp	Finite Field operations
+number_theory/modular_sqrt.cpp  Modular squareroot (Tonelli-Shanks)
 
 [Numeric]
 numeric/binomial.cpp	Binomial
@@ -58,6 +59,7 @@ graphs/kshortest.cpp	K-ShortestPaths
 graphs/func_lenha.cpp	Functional graphs
 graphs/mstdir.cpp   Minimum arborescence (MST digraph)
 graphs/steinertree.cpp  Minimum Steiner tree
+graphs/erdos.cpp    Erdos Gallai theorem
 
 [Data structures]
 data_structures/sparseTable.cpp	Sparse Table
@@ -75,6 +77,7 @@ data_structures/hldmax.cpp	Heavy Light Decomposition
 data_structures/linkcut.cpp	Link-Cut Tree
 data_structures/mo.cpp	Mo's algorithm (sqrt decomp)
 data_structures/segpa.cpp	Segtree PA
+data_structures/intervaltree.cpp	Interval Tree
 
 [Strings]
 string/ahoCorasick.cpp	Aho Corasick Automata
@@ -129,7 +132,9 @@ geometry/Angle.cpp	Angle sorting
 geometry/kdTree.cpp	K-D Tree
 geometry/point3d.cpp	Point3D
 geometry/3dhull.cpp	Convex hull 3D
-geometry/GeometryRusso.cpp	Another geometry lib
+geometry/halfplaneIS.cpp Half Plane Intersection
+geometry/rayDistance.cpp    Ray(semi-reta) distance
+# geometry/GeometryRusso.cpp  Another Geometry lib
 
 [Java]
 Java/template.java	Template

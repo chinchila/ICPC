@@ -1,3 +1,5 @@
+// Interval tree is capable of giving you all intervals overllaping
+// usage: ITree::vector_t intervals; ITree tree(move(intervals));
 template <class Sca, typename Val>
 class Interval {
 public:
