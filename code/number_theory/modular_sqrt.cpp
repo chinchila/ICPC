@@ -39,13 +39,13 @@ bool modsqrt( ll n, ll p, ll &root1, ll &root2 ){
 			return true;
 		}
 		while (zz != 1 && i < (m - 1))
-			zz = zz * zz % p, ++i;
+			zz = mulmod(zz, zz, p), ++i;
 		e = m - i - 1;
 		while( e > 0 )
-			b = b * b % p, --e;
-		r = r * b % p;
-		c = b * b % p;
-		t = t * c % p;
+			b = mulmod(b, b, p), --e;
+		r = mulmod(r, b, p);
+		c = mulmod(b, b, p);
+		t = mulmod(t, c, p);
 		m = i;
 	}
 }

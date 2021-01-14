@@ -5,9 +5,8 @@
  *   - O(min(V^(2/3), E^(1/2)) E) for unit capacity graphs
  */
 #define ll long long
+const ll INF = numeric_limits<ll>::max();
 class max_flow {
-	static const ll INF = numeric_limits<ll>::max();
-
 	struct edge {
 		int t;
 		unsigned long rev;
@@ -17,7 +16,6 @@ class max_flow {
 	vector<edge> adj[MAXN];
 	int dist[MAXN];
 	int ptr[MAXN];
-  int cut[MAXN];
 
 	bool bfs( int s, int t ) {
 		memset( dist, -1, sizeof dist );
@@ -68,13 +66,13 @@ public:
 	}
 
 	void clear() {
-		for( int n = 0 ; n < MAX_N ; ++n ) adj[n].clear();
+		for( int n = 0 ; n < MAXN ; ++n ) adj[n].clear();
 	}
-  void dfs( int u, max_flow &mf ) {
-  	cut[u] = true;
-  	for( auto &e : mf.adj[u] )
-  		if( e.cap > e.f && !cut[e.t] ) dfs( e.t, mf );
-  }
+	void dfs( int u, max_flow &mf ) {
+		cut[u] = true;
+		for( auto &e : mf.adj[u] )
+			if( e.cap > e.f && !cut[e.t] ) dfs( e.t, mf );
+	}
 };
 
 max_flow g;
