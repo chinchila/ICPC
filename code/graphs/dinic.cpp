@@ -68,6 +68,9 @@ public:
 	void clear() {
 		for( int n = 0 ; n < MAXN ; ++n ) adj[n].clear();
 	}
+
+	bool inCut( int u ){ return dist[u] != -1; }
+
 	void dfs( int u, max_flow &mf ) {
 		cut[u] = true;
 		for( auto &e : mf.adj[u] )
