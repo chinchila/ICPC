@@ -1,3 +1,4 @@
+#define ll long long
 struct L {
     mutable ll a, b, p;
     bool operator<(const L &rhs) const { return a < rhs.a; }
@@ -28,3 +29,33 @@ struct DynamicHull : multiset<L, less<>> {
         return eval(l, x);
     }
 };
+
+// Monotonic
+vector<pair<ll, ll> > lines;
+vector<double> inter;
+ 
+// x = (c2 - c1)/(m1 - m2)
+double intersection(pair<ll, ll> A, pair<ll, ll> B) {
+  double ans = B.second - A.second;
+  ans /= A.first - B.first;
+  return ans;
+}
+ 
+// Insert mx + c
+void insert(pair<ll, ll> line) {
+  while(inter.size() > 0 && intersection(lines.back(), line) <= inter.back()) {
+    inter.pop_back();
+    lines.pop_back();
+  }
+  if(!lines.empty()) {
+    inter.push_back(intersection(lines.back(), line));
+  }
+  lines.push_back(line);
+}
+
+int it = 0;
+ll get_min(ll x) {
+  it = min(it, (int)inter.size());
+  while(it < inter.size() && inter[it] < x) it++;
+  return x * lines[it].first + lines[it].second;
+}
