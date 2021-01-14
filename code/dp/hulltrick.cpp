@@ -1,33 +1,30 @@
-//O(n log n )
-#define ll long long
-struct Point{
-	ll x, y;
-	Point( ll x = 0, ll y = 0 ) : x(x), y(y) {}
-	Point operator-( Point p ){ return Point(x - p.x, y - p.y); }
-	Point operator+( Point p ){ return Point(x + p.x, y + p.y); }
-	Point ccw(){ return Point( -y, x ); }
-	ll operator%( Point p ){ return x*p.y - y*p.x; }
-	ll operator*( Point p ){ return x*p.x + y*p.y; }
-	bool operator<( Point p ) const { return x == p.x ? y < p.y : x < p.x; }
+struct L {
+    mutable ll a, b, p;
+    bool operator<(const L &rhs) const { return a < rhs.a; }
+    bool operator<(ll x) const { return p < x; }
+	bool operator>(const L &rhs) const { return a > rhs.a; }
+    bool operator>(ll x) const { return p < x; }
 };
-
-pair<vector<Point>, vector<Point>> ch( Point *v ) {
-	vector<Point> hull, vecs;
-	for( int i = 0; i < n; ++i ) {
-		if( hull.size() and hull.back().x == v[i].x ) continue;
-		while( vecs.size() and vecs.back()*( v[i] - hull.back() ) <= 0 )
-			vecs.pop_back(), hull.pop_back();
-		if( hull.size() )
-			vecs.pb( ( v[i] - hull.back() ).ccw() );
-		hull.pb( v[i] );
-	}
-	return { hull, vecs };
-}
-
-ll get(ll x) {
-		Point query = {x, 1};
-		auto it = lower_bound(vecs.begin(), vecs.end(), query, [](Point a, Point b) {
-				return a%b > 0;
-		});
-		return query*hull[it - vecs.begin()];
-}
+// change less to greater or operators as you need min or max
+// if double change inf to a bigger number and div to a/b
+struct DynamicHull : multiset<L, less<>> {
+    static const ll kInf = 1e18;
+	ll eval(L l, ll x){ return l.a*x + l.b; }
+    ll div(ll a, ll b) { return a / b - ((a ^ b) < 0 && a % b); }
+    bool inter(iterator x, iterator y) {
+        if (y == end()) { x->p = kInf; return false; }
+        if (x->a == y->a) x->p = x->b > y->b ? kInf : -kInf;
+        else x->p = div(y->b - x->b, x->a - y->a);
+        return x->p >= y->p;
+    }
+    void add(ll a, ll b) {
+        auto z = insert({a, b, 0}), y = z++, x = y;
+        while (inter(y, z)) z = erase(z);
+        if (x != begin() && inter(--x, y)) inter(x, y = erase(y));
+        while ((y = x) != begin() && (--x)->p >= y->p) inter(x, erase(y));
+    }
+    ll get(ll x) {
+        auto l = *lower_bound(x);
+        return eval(l, x);
+    }
+};
