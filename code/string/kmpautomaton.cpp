@@ -10,7 +10,7 @@ trans operator +(trans a, trans b) {
 	trans c(a.m);
 	for(int i = 0; i < c.m; i++) {
 		c.to[i] = b.to[a.to[i]];
-		c.match[i] = (a.match[i] + b.match[a.to[i]])%MOD;
+		c.match[i] = a.match[i] + b.match[a.to[i]];
 	}
 	return c;
 }
