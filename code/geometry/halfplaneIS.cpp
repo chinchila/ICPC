@@ -1,5 +1,5 @@
 // Half plane intersection O(n*log(n))
-// lines must be ccw (anti-horário)
+// lines must be ccw (antihorario)
 
 #include "point.h"
 #include "lineIntersection.cpp"

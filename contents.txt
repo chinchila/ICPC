@@ -10,7 +10,7 @@ number_theory/pollard.cpp	Pollard Rho
 number_theory/totient.cpp	$\phi$ of Euler
 number_theory/prime_factors.cpp	Compute prime factors
 number_theory/finite_field.cpp	Finite Field operations
-number_theory/modular_sqrt.cpp  Modular squareroot (Tonelli-Shanks)
+number_theory/modular_sqrt.cpp	Modular squareroot (Tonelli-Shanks)
 
 [Numeric]
 numeric/binomial.cpp	Binomial
@@ -22,7 +22,7 @@ numeric/gauss.cpp	Gaussian elimination
 numeric/karatsuba.cpp	Karatsuba
 numeric/incexc.cpp	Inclusion-Exclusion principle
 numeric/lagrangepoly.cpp	Lagrange polynomial interpolation
-numeric/floorsum.cpp    Floor-sum
+numeric/floorsum.cpp	Floor-sum
 
 [Graph algorithms]
 graphs/dijkstra.cpp	Dijkstra Shortest path
@@ -57,9 +57,9 @@ graphs/chromatic.cpp	Chromatic Number
 graphs/dynamic_reachdag.cpp	Dynamic reachability in DAG
 graphs/kshortest.cpp	K-ShortestPaths
 graphs/func_lenha.cpp	Functional graphs
-graphs/mstdir.cpp   Minimum arborescence (MST digraph)
-graphs/steinertree.cpp  Minimum Steiner tree
-graphs/erdos.cpp    Erdos Gallai theorem
+graphs/mstdir.cpp	Minimum arborescence (MST digraph)
+graphs/steinertree.cpp	Minimum Steiner tree
+graphs/erdos.cpp	Erdos Gallai theorem
 
 [Data structures]
 data_structures/sparseTable.cpp	Sparse Table
@@ -132,9 +132,9 @@ geometry/Angle.cpp	Angle sorting
 geometry/kdTree.cpp	K-D Tree
 geometry/point3d.cpp	Point3D
 geometry/3dhull.cpp	Convex hull 3D
-geometry/halfplaneIS.cpp Half Plane Intersection
-geometry/rayDistance.cpp    Ray(semi-reta) distance
-# geometry/GeometryRusso.cpp  Another Geometry lib
+geometry/halfplaneIS.cpp	Half Plane Intersection
+geometry/rayDistance.cpp	Ray(semi-reta) distance
+# geometry/GeometryRusso.cpp	Another Geometry lib
 
 [Java]
 Java/template.java	Template
