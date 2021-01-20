@@ -24,3 +24,20 @@ void totient( int N ) {
 		for( int i = 2 * j ; i < N ; i += j ) phi[i] = phi[i] / j * ( j - 1 );
 	}
 }
+
+// Carmichael function
+// smallest m such that a^m = 1 mod n
+ll carmichael( ll n ){
+	if( n == 1 ) return 1;
+	map<ll, int> v;
+	ll res = -1;
+	fator(n, v);
+	for( auto fac : v ){
+		ll p = fac.first, r = fac.second;
+		ll phi = fastexp(p, r-1, n)*(p-1);
+		if( p == 2 && r >= 3 ) phi /= 2;
+		if(res == -1) res = phi;
+		else res = lcm(res, phi);
+	}
+	return res;
+}

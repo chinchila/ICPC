@@ -1,7 +1,7 @@
 // hld::init() to build | O( n log n ) to build and O(log n) to query/update
 // Be carefull with x*10^5 limits
 #define ll long long
-#define MAXSEG 2*MAXN
+#define MAXSEG 4*MAXN
 int N;
 vector<int> adj[MAXN];
 
