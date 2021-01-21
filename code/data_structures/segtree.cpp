@@ -5,13 +5,13 @@
 ll st[MAXSEG];
 ll lazy[MAXSEG];
 
-void build(int n, int s, int e, int *v){
-    if( s == e ) st[n] = v[s];
+void build(int node, int s, int e, ll *v){
+    if( s == e ) st[node] = v[s];
     else{
         int m = (s+e)/2;
-        build((n*2)+1, s, m, v);
-        build((n*2)+2, m+1, e, v);
-        st[n] = max(st[(n*2)+1], st[(n*2)+2]);
+        build(2 * node + 1, s, m, v);
+        build(2 * node + 2, m+1, e, v);
+        st[node] = max(st[2 * node + 1], st[2 * node + 2]);
     }
 }
 
