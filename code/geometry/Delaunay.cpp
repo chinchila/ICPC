@@ -7,15 +7,19 @@ If any three points are colinear or any four are on the same circle, behavior is
 #include "point.cpp"
 #include "3dhull.cpp"
 
-template<class F>
-void delaunay(vector<P>& ps, F trifun) {
-	if (sz(ps) == 3) { int d = (ps[0].cross(ps[1], ps[2]) < 0);
-		trifun(0,1+d,2-d); }
-	vector<P3> p3;
-	trav(p, ps) p3.emplace_back(p.x, p.y, p.dist2());
-	if (sz(ps) > 3) trav(t, hull3d(p3)) if ((p3[t.b]-p3[t.a]).
-			cross(p3[t.c]-p3[t.a]).dot(P3(0,0,1)) < 0)
-		trifun(t.a, t.c, t.b);
+vector<array<P,3>> triHull(vector<P> p) {
+	vector<P3> p3; vector<array<P,3>> res; for(auto x:p) p3.pb(P3(x.x,x.y,x.dist2()));
+	bool ok = 0; for(auto t:p3) if (!coplanar(p3[0],p3[1],p3[2],t)) ok = 1;
+	if (!ok) { // all points concyclic
+		sort(1+all(p),[&p](P a, P b) { return (a-p[0]).cross(b-p[0]) > 0; });
+		for(size_t i=1;i<p.size()-1;++i) res.pb({p[0],p[i],p[i+1]});
+	} else {
+		#define nor(h) P(p3[h].x,p3[h].y)
+		for(auto t:hull3d(p3)) 
+			if((p3[t[1]]-p3[t[0]]).cross(p3[t[2]]-p3[t[0]]).dot(P3(0,0,1)) < 0)
+				res.pb({nor(t[0]),nor(t[2]),nor(t[1])});
+	}
+	return res;
 }
 
 /**
@@ -102,16 +106,18 @@ pair<Q,Q> rec(const vector<P>& s) {
 	return { ra, rb };
 }
 
-vector<P> triangulate(vector<P> pts) {
+vector<array<P,3>> triangulate(vector<P> pts) {
 	sort(pts.begin(), pts.end());
 	if (pts.size() < 2) return {};
 	Q e = rec(pts).first;
 	vector<Q> q = {e};
-	int qi = 0;
+	size_t qi = 0;
 	while (e->o->F().cross(e->F(), e->p) < 0) e = e->o;
 #define ADD { Q c = e; do { c->mark = 1; pts.push_back(c->p); \
 	q.push_back(c->r()); c = c->next(); } while (c != e); }
 	ADD; pts.clear();
 	while (qi < q.size()) if (!(e = q[qi++])->mark) ADD;
-	return pts;
+	vector<array<P,3>> ret(pts.size()/3); 
+	for(size_t i=0;i<pts.size();++i) ret[i/3][i%3] = pts[i];
+	return ret;
 }
