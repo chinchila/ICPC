@@ -76,7 +76,7 @@ struct eertree{
 	void clearNode( int i ){
 		tree[i].start = tree[i].end = 0;
 		tree[i].len = tree[i].cnt = 0;
-		tree[i].num = tree[i].sufflink = tree[i].marked = 0;
+		tree[i].num = tree[i].sufflink = 0;
 		tree[i].edges.clear();
 		memset(tree[i].nxt, 0, sizeof tree[i].nxt);
 	}

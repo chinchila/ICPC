@@ -125,15 +125,16 @@ geometry/PolygonCut.cpp	Polygon cut
 geometry/polygonarea.cpp	Area of polygon
 geometry/PolygonCenter.cpp	Center of polygon
 geometry/LineHullIntersection.cpp	Line convex polygon intersection
-geometry/PolyhedronVolume.cpp	Volume of polyhedron
 geometry/linearTransformation.cpp	Linear Transformation
 geometry/sphericalDistance.cpp	Spherical Distance
 geometry/Angle.cpp	Angle sorting
 geometry/kdTree.cpp	K-D Tree
-geometry/point3d.cpp	Point3D
-geometry/3dhull.cpp	Convex hull 3D
 geometry/halfplaneIS.cpp	Half Plane Intersection
 geometry/rayDistance.cpp	Ray(semi-reta) distance
+geometry/point3d.cpp	Point3D
+geometry/3dbasics.cpp	Basic operations on 3D
+geometry/PolyhedronVolume.cpp	Volume and area of polyhedron
+geometry/3dhull.cpp	Convex hull 3D
 # geometry/GeometryRusso.cpp	Another Geometry lib
 
 [Java]

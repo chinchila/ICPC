@@ -1,95 +1,105 @@
 /* Minimum-Cost, Maximum-Flow solver using Successive Shortest Paths with Dijkstra and SPFA-SLF.
  * Requirements:
- *   - No duplicate or antiparallel edges with different costs.
  *   - No negative cycles.
- * Time Complexity: O(Ef lg V) average-case, O(VE + Ef lg V) worst-case.
+ * Time Complexity: O(Ef lg V) average-case, O(VE + Ef lg V) worst-case with negative costs.
  */
-#define INF 0x3f3f3f3f3f3f3f3f
-template<int V, class T=long long>
+#define ll long long
+const ll INF = numeric_limits<ll>::max()/3;
+template<int V, class T=ll>
 class mcmf {
-	unordered_map<int, T> cap[V], cost[V];
+	struct edge {
+		int t, rev;
+		T cap, cost, f;
+	};
+
+	vector<edge> adj[V];
 	T dist[V];
 	int pre[V];
-	bool visited[V];
-	void spfa(int s) {
-		static list<int> q;
+	bool vis[V];
+
+	void spfa(int s) { /* only needed if there are negative costs */
+		list<int> q;
 		memset(pre, -1, sizeof pre);
-		fill(dist, dist+V, INF);
-		memset(visited, 0, sizeof visited);
+		memset(vis, 0, sizeof vis);
+		fill(dist, dist + V, INF);
 		dist[s] = 0;
 		q.push_back(s);
 		while (!q.empty()) {
 			int v = q.front();
 			q.pop_front();
-			visited[v] = false;
-			for (auto p : cap[v]) if (p.second) {
-				int u = p.first;
-				T d = dist[v] + cost[v][u];
+			vis[v] = false;
+			for (auto e : adj[v]) if (e.cap != e.f) {
+				int u = e.t;
+				T d = dist[v] + e.cost;
 				if (d < dist[u]) {
-					dist[u] = d, pre[u] = v;
-					if (!visited[u]) {
+					dist[u] = d, pre[u] = e.rev;
+					if (!vis[u]) {
 						if (q.size() && d < dist[q.front()]) q.push_front(u);
 						else q.push_back(u);
-						visited[u] = true;
+						vis[u] = true;
 					}
 				}
 			}
 		}
 	}
+
+	priority_queue<pair<T, int>, vector<pair<T, int> >,
+		greater<pair<T, int> > > pq; /* for dijkstra */
+
 	void dijkstra(int s) {
-		static priority_queue<pair<T, int>, vector<pair<T, int> >,
-				greater<pair<T, int> > > pq;
 		memset(pre, -1, sizeof pre);
-		fill(dist, dist+V, INF);
-		memset(visited, 0, sizeof visited);
+		memset(vis, 0, sizeof vis);
+		fill(dist, dist + V, INF);
 		dist[s] = 0;
-		pq.push({0, s});
+		pq.emplace(0, s);
 		while (!pq.empty()) {
 			int v = pq.top().second;
 			pq.pop();
-			if (visited[v]) continue;
-			visited[v] = true;
-			for (auto p : cap[v]) if (p.second) {
-				int u = p.first;
-				T d = dist[v] + cost[v][u];
+			if (vis[v]) continue;
+			vis[v] = true;
+			for (auto e : adj[v]) if (e.cap != e.f) {
+				int u = e.t;
+				T d = dist[v] + e.cost;
 				if (d < dist[u]) {
-					dist[u] = d, pre[u] = v;
-					pq.push({d, u});
+					dist[u] = d, pre[u] = e.rev;
+					pq.emplace(d, u);
 				}
 			}
 		}
 	}
+
 	void reweight() {
-		for (int v = 0; v < V; v++) {
-			for (auto& p : cost[v]) {
-				p.second += dist[v] - dist[p.first];
-			}
-		}
+		for (int v = 0; v < V; v++)
+			for (auto& e : adj[v])
+				e.cost += dist[v] - dist[e.t];
 	}
+
 public:
-	unordered_map<int, T> flows[V];
-	void add(int u, int v, T f=1, T c=0) {
-		cap[u][v] += f;
-		cost[u][v] = c;
-		cost[v][u] = -c;
+	void add(int u, int v, T cap=1, T cost=0) {
+		adj[u].push_back({ v, (int) adj[v].size(), cap, cost, 0 });
+		adj[v].push_back({ u, (int) adj[u].size() - 1, 0, -cost, 0 });
 	}
-	pair<T, T> calc(int s, int t) {
-		spfa(s);
+
+	pair<T, T> calc(int s, int t, T f=INF) {
+		spfa(s); /* comment out if all costs are non-negative */
 		T totalflow = 0, totalcost = 0;
 		T fcost = dist[t];
 		while (true) {
 			reweight();
-			dijkstra(s);
+			spfa(s);
 			if (~pre[t]) {
 				fcost += dist[t];
-				T flow = cap[pre[t]][t];
-				for (int v = t; ~pre[v]; v = pre[v])
-					flow = min(flow, cap[pre[v]][v]);
-				for (int v = t; ~pre[v]; v = pre[v]) {
-					cap[pre[v]][v] -= flow;
-					cap[v][pre[v]] += flow;
-					flows[pre[v]][v] += flow;
-					flows[v][pre[v]] -= flow;
+				T flow = f;
+				for (int v = t; ~pre[v]; v = adj[v][pre[v]].t) {
+					edge& r = adj[v][pre[v]];
+					edge& e = adj[r.t][r.rev];
+					flow = min(flow, e.cap - e.f);
+				}
+				for (int v = t; ~pre[v]; v = adj[v][pre[v]].t) {
+					edge& r = adj[v][pre[v]];
+					edge& e = adj[r.t][r.rev];
+					e.f += flow;
+					r.f -= flow;
 				}
 				totalflow += flow;
 				totalcost += flow * fcost;
@@ -98,13 +108,11 @@ public:
 		}
 		return { totalflow, totalcost };
 	}
+	bool inCut( int u ) { return dist[u] != INF; };
 	void clear() {
 		for (int i = 0; i < V; i++) {
-			cap[i].clear();
-			cost[i].clear();
-			flows[i].clear();
-			dist[i] = pre[i] = visited[i] = 0;
+			adj[i].clear();
+			dist[i] = pre[i] = vis[i] = 0;
 		}
 	}
 };
-

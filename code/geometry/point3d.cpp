@@ -9,6 +9,7 @@ template<class T> struct Point3D {
 	P operator-(R p) const { return P(x-p.x, y-p.y, z-p.z); }
 	P operator*(T d) const { return P(x*d, y*d, z*d); }
 	P operator/(T d) const { return P(x/d, y/d, z/d); }
+	bool operator!=(R p) const { return !(p==*this);}
 	T dot(R p) const { return x*p.x + y*p.y + z*p.z; }
 	P cross(R p) const { return P(y*p.z - z*p.y, z*p.x - x*p.z, x*p.y - y*p.x); }
 	T dist2() const { return x*x + y*y + z*z; }
@@ -28,5 +29,4 @@ template<class T> struct Point3D {
 };
 
 typedef double PType;
-typedef Point<PType> P;
-
+typedef Point3D<PType> P3;
