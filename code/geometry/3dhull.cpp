@@ -68,7 +68,6 @@ vector<F> hull3dFast(vP3& p) { // order of points is changed s.t. first four poi
 		F f = hull[a]; return above(p[f[0]],p[f[1]],p[f[2]],p[b]); };
 	auto edge = [&](pi e) -> pi { return {hull[e.f][e.s],hull[e.f][(e.s+1)%3]}; };
 	auto glue = [&](pi a, pi b) { // link two faces by an edge
-		pi x = edge(a);
 		other[a.f][a.s] = b, other[b.f][b.s] = a;
 	}; 
 	ad(0,1,2), ad(0,2,1); if (abv(1,3)) swap(p[1],p[2]); // ensure face 0 is removed when i=3
