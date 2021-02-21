@@ -40,43 +40,50 @@ double Gauss( vector<vector<double> > &a, vector<vector<double> > &b ) {
 	return det;
 }
 
-// Implementation from cp-algorithms
-// works with modulus (maybe the first works too)
-int gauss(vector <vector<num> > a, vector<num> &ans) {
-	int n = (int) a.size();
-	int m = (int) a[0].size() - 1;
-	vector<int> where(m, -1);
-	for (int col=0, row=0; col<m && row<n; ++col) {
-		int sel = row;
-		for (int i=row; i<n; ++i)
-			if (a[i][col] > a[sel][col])
-				sel = i;
-		if(a[sel][col] == 0)
-			continue;
-		for (int i=col; i<=m; ++i)
-			swap (a[sel][i], a[row][i]);
-		where[col] = row;
-		for (int i=0; i<n; ++i)
-			if (i != row) {
-				num c = a[i][col] / a[row][col];
-				for (int j=col; j<=m; ++j)
-					a[i][j] -= a[row][j] * c;
-			}
-		++row;
+
+/////////implementation with basis and rank//////////////////
+// sols = gauss(A, b)
+// rank = basis.size()-1
+// b = sols[0]
+// basis = sols[1:]
+template <class T> int row_reduce(vector<vector<T>>& a, int lim = 1e9) {
+	int n = a.size(), m = a[0].size(), rank = 0;
+	for (int j = 0; j < min(m, lim); ++j) {
+		for (int i = rank + 1; i < n; ++i) if (!(a[i][j] == 0)) {
+			swap(a[rank], a[i]);
+			break;
+		}
+		if (a[rank][j] == 0) continue;
+		T inv = 1 / a[rank][j];
+		for (auto&& e : a[rank]) e *= inv;
+		for (int i = 0; i < n; ++i) if (i != rank and !(a[i][j] == 0))
+			for (int k = m; k-- > j; ) a[i][k] -= a[rank][k] * a[i][j];
+		if (++rank == n) break;
 	}
-	ans.assign (m, 0);
-	for (int i=0; i<m; ++i)
-		if (where[i] != -1)
-			ans[i] = a[where[i]][m]/a[where[i]][i];
-	for (int i=0; i<n; ++i) {
-		num sum = 0;
-		for (int j=0; j<m; ++j)
-			sum += ans[j] * a[i][j];
-		if (sum - a[i][m] > 0)
-			return 0;
-	}
-	return 1;
+	return rank;
 }
+
+template <class T>
+vector<vector<T>> gauss(vector<vector<T>> a, vector<T> b) {
+	int n = a.size(), m = a[0].size();
+	for (int i = 0; i < n; ++i) a[i].push_back(b[i]);
+	int rank = row_reduce(a, m);
+	for (int i = rank; i < n; ++i) if (!(a[i][m] == 0)) return {};
+	vector<vector<T>> res(1, vector<T>(m));
+	vector<int> pivot(m, -1);
+	for (int i = 0, j = 0; i < rank; ++i) {
+		while (a[i][j] == 0) ++j;
+		res[0][j] = a[i][m], pivot[j] = i;
+	}
+	for (int j = 0; j < m; ++j) if (pivot[j] == -1) {
+		vector<T> x(m);
+		x[j] = -1;
+		for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = a[pivot[k]][j];
+		res.push_back(x);
+	}
+	return res;
+}
+/////////////////end///////////////////
 
 // Gauss with bitset (mod 2) 32 times faster
 // m = # of equations

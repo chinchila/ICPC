@@ -17,6 +17,7 @@ template<int p> struct FF {
 	FF& operator-=(const FF<p>& other) { *this += -other; return *this; }
 	FF& operator*=(const FF<p>& other) { val = (val * other.val) % p; return *this; }
 	FF& operator/=(const FF<p>& other) { *this *= other.inv(); return *this; }
+	bool operator>(const FF<p>& other) const { return val > other.val; }
 
 	FF operator+(const FF<p>& other) const { return FF(*this) += other; }
 	FF operator-(const FF<p>& other) const { return FF(*this) -= other; }
