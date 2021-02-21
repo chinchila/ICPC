@@ -60,6 +60,7 @@ graphs/func_lenha.cpp	Functional graphs
 graphs/mstdir.cpp	Minimum arborescence (MST digraph)
 graphs/steinertree.cpp	Minimum Steiner tree
 graphs/erdos.cpp	Erdos Gallai theorem
+graphs/maxclique.cpp	Maximum clique in general graph
 
 [Data structures]
 data_structures/sparseTable.cpp	Sparse Table
