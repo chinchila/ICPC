@@ -1,7 +1,6 @@
 // Rabin-karp O(n+m)
 #define ull unsigned long long
 const int B = 31;
-char s[MAXN], p[MAXN];
 
 void rabin( string s, string p ) {
 	int n = s.length(), m = p.length();

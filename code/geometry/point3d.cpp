@@ -1,3 +1,6 @@
+#define INF 1e19
+#define EPS 1e-9
+template <class T> int sgn( T x ) { return (x > 0) - (x < 0); }
 template<class T> struct Point3D {
 	typedef Point3D P;
 	typedef const P& R;
@@ -9,6 +12,7 @@ template<class T> struct Point3D {
 	P operator-(R p) const { return P(x-p.x, y-p.y, z-p.z); }
 	P operator*(T d) const { return P(x*d, y*d, z*d); }
 	P operator/(T d) const { return P(x/d, y/d, z/d); }
+	bool isZero() const { return fabs(x)<EPS and fabs(y)<EPS and fabs(z)<EPS;}
 	bool operator!=(R p) const { return !(p==*this);}
 	T dot(R p) const { return x*p.x + y*p.y + z*p.z; }
 	P cross(R p) const { return P(y*p.z - z*p.y, z*p.x - x*p.z, x*p.y - y*p.x); }

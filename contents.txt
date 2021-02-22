@@ -136,6 +136,8 @@ geometry/point3d.cpp	Point3D
 geometry/3dbasics.cpp	Basic operations on 3D
 geometry/PolyhedronVolume.cpp	Volume and area of polyhedron
 geometry/3dhull.cpp	Convex hull 3D
+geometry/3ddistances.cpp	3D Distances
+geometry/3dplanelineintersect.cpp	3D Plane Line intersection
 # geometry/GeometryRusso.cpp	Another Geometry lib
 
 [Java]
