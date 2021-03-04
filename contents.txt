@@ -145,12 +145,13 @@ geometry/3ddistances.cpp	3D Distances
 geometry/3dplanelineintersect.cpp	3D Plane Line intersection
 # geometry/GeometryRusso.cpp	Another Geometry lib
 
-[Java]
-Java/template.java	Template
-Java/bigmath.java	Big Numbers
+# [Java]
+# Java/template.java	Template
+# Java/bigmath.java	Big Numbers
 
 [Miscellaneous]
 misc/matrix.cpp	Matrix operations
+misc/bigint.cpp	BigInt
 misc/RNG.cpp	Good RNG
 misc/mergesort.cpp	Merge sort with inversions
 misc/fstoi.cpp	Fast string to int
