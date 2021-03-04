@@ -24,6 +24,11 @@ numeric/incexc.cpp	Inclusion-Exclusion principle
 numeric/lagrangepoly.cpp	Lagrange polynomial interpolation
 numeric/floorsum.cpp	Floor-sum
 
+[Polynomials]
+polynomials/poly.cpp	Polynomial primitive
+polynomials/multieval.cpp	Multipoint evaluation
+polynomials/multieval.cpp	Interpolation
+
 [Graph algorithms]
 graphs/dijkstra.cpp	Dijkstra Shortest path
 graphs/SPFA.cpp	SPFA
