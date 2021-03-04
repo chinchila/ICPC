@@ -87,6 +87,7 @@ template<typename T> T gauss(mat v1, mat v2){
 	}
 }
 // Example: find g from f*h = g mod q
+// f and g both smaller than sqrt(q/2) holds
 // this gives us f*h = q*k+g
 // with h about the same size of q
 // and k about the same size of f and g
