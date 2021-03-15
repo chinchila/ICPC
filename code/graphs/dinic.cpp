@@ -71,10 +71,10 @@ public:
 
 	bool inCut( int u ){ return dist[u] != -1; }
 
-	void dfs( int u, max_flow &mf ) {
+	void dfs( int u ) {
 		cut[u] = true;
-		for( auto &e : mf.adj[u] )
-			if( e.cap > e.f && !cut[e.t] ) dfs( e.t, mf );
+		for( auto &e : adj[u] )
+			if( e.cap > e.f && !cut[e.t] ) dfs( e.t );
 	}
 };
 
