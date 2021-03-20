@@ -91,7 +91,10 @@ namespace fft {
 		fft(fa, sz);
 		vector<int> res(need);
 		for(int i = 0; i < need; i++) {
-			res[i] = fa[i].x + 0.5;
+			if(fa[i].x < 0)
+				res[i] = fa[i].x - 0.5;
+			else
+				res[i] = fa[i].x + 0.5;
 		}
 		return res;
 	}
