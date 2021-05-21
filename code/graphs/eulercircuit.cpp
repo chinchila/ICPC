@@ -24,6 +24,7 @@ vector<int> circuit( vector<vector<int> > adj ){
 			curr_path.pop();
 		}
 	}
+	reverse(circuit.begin(), circuit.end());
 	return circuit;
 }
 
