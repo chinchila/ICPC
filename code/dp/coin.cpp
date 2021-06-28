@@ -10,6 +10,22 @@ dp.set( 0 );
 for( int i = 0 ; i < n ; ++i )
 	dp |= dp << v[i];
 
+// Código que decompõe as frequências
+// onde f[i] é a frequência do peso i
+// x = min(w, soma dos pesos)
+dp.set( 0 );
+for(int i = 1; i <= x; i++) {
+  while(f[i] >= 3) {
+    f[i] -= 2;
+    f[i+i]++;
+  }
+  while(f[i] > 0) {
+    f[i]--;
+    dp |= dp << i;
+  }
+}
+
+
 // coin change
 #define INF 0x3f3f3f3f
 // find the minimum number of coin changes

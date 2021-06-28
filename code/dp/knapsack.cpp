@@ -83,6 +83,8 @@ int solve(){
 }
 
 // Branch and bound, O(2^c) where c is small most of time
+// Roda rápido, pode ser uma boa alternativa para quando os
+// limites são grandes.
 template <class T>
 struct knapsack {
 	T c; 
