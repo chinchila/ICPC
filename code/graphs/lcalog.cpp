@@ -13,6 +13,7 @@ void dfs( int u ) {
 			parent[v] = u;
 			level[v] = level[u] + 1;
 			dist[v] = dist[u] + w;
+			// dist[v] = w; (watch for this)
 			dfs( v );
 		}
 	}

@@ -81,5 +81,15 @@ struct Bloss {
 		}
 		return ans;
 	}
+	// só mudar idx=1 se o grafo for indexado em 1
+	// precisa rodar o match antes :)
+	vector<pair<int, int> > result(int idx=0){
+		int n = adj.size();
+		vector<pair<int, int> > result;
+		for( int i = idx ; i < n+idx ; ++i)
+			if(i > pairs[i])
+				result.push_back({pairs[i], i});
+		return result;
+	}
 };
 
